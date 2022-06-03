@@ -1,2 +1,2 @@
 let numhens = 5;
-numhens+1
+console.log(numhens+1)
