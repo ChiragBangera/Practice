@@ -29,14 +29,26 @@ if (rating === 3) {
     console.log("No Rating Found");
 }
 
-let password = prompt("Enter A Password")
-if (password.length>6 && password.indexOf(" ")=== -1){
-    console.log("Password Acceptale");
-}else if (!password){
-    password = prompt("Enter A Password")
-}
+// let password = prompt("Enter A Password")
+// if (password.length>6 && password.indexOf(" ")=== -1){
+//     console.log("Password Acceptale");
+// }else if (!password){
+//     password = prompt("Enter A Password")
+// }
 
+// Arrays
+let colors = ['red','blue','green','yellow','green'];
 
+colors[2] = "Hunter";
+// colors[6] = "Orange"
+colors.push("Pink","Black","Indigo","Purple","Brown","Grey")
+colors.shift()
+colors.unshift("Violet")
+
+colors.reverse()
+let remove = colors.splice(2,2)
+
+console.log(colors)
 
 
 
