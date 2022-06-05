@@ -37,18 +37,30 @@ if (rating === 3) {
 // }
 
 // Arrays
-let colors = ['red','blue','green','yellow','green'];
+let colors = ['red', 'blue', 'green', 'yellow', 'green'];
 
 colors[2] = "Hunter";
 // colors[6] = "Orange"
-colors.push("Pink","Black","Indigo","Purple","Brown","Grey")
+colors.push("Pink", "Black", "Indigo", "Purple", "Brown", "Grey")
 colors.shift()
 colors.unshift("Violet")
 
 colors.reverse()
-let remove = colors.splice(2,2)
+let remove = colors.splice(2, 2)
 
 console.log(colors)
 
+// Objects and Literals
+const person = { first_name: "mick", last_name: "bangera" }
+console.log(person.first_name)
 
+// Fror Loops
+for (let i=1; i <=6; i++){
+    console.log("Da ba dee da ba daa")
+}
+
+// looping Over arrays
+for (let i=0; i<colors.length; i++){
+    console.log(i+1,colors[i])
+}
 
