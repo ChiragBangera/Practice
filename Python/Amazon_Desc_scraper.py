@@ -27,3 +27,4 @@ for url in urls:
         data[item.th.text.strip(' \n')] = item.td.text.strip(' \u200e\n')
     results.append(data)
 df = pd.DataFrame(results)
+print(df.head())
