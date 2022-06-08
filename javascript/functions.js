@@ -51,3 +51,11 @@ console.log(hen.name)
 hen.layAnEgg()
 hen.layAnEgg()
 console.log(hen.eggCount)
+
+
+const numbers = [2,7,11,15]
+const target = 9
+
+for (const[index,num] of numbers.entries()){
+    console.log(index,num)
+}
