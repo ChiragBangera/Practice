@@ -32,11 +32,12 @@ const cat ={
     obs:"yes",
     strong:"yes",
     breed:"Persian",
-    meow(){
-        console.log(this.breed)
-    }
+    // meow(){
+    //     console.log(this.breed)
+    movies:"red line"
 }
-cat.meow()
+
+// cat.meow
 
 const hen = {
     name:'Helen',
@@ -59,3 +60,42 @@ const target = 9
 for (const[index,num] of numbers.entries()){
     console.log(index,num)
 }
+
+// javascript array methods
+ 
+const colors = ['red', 'blue', 'green', 'yellow', 'green'];
+const cols = colors.map((para)=> {
+    return para.toUpperCase()
+})
+
+console.log(cols)
+
+// Arrow Functions
+const rollDie = ()=>(
+    Math.floor(Math.random()*6) + 1
+)
+
+console.log(rollDie())
+
+setTimeout(()=>(
+    console.log("Hello")
+), 3000)
+
+const t =5
+const condition = scores.filter(n=>(
+    n <= t
+))
+
+console.log(condition)
+
+// reduce method
+const red = scores.reduce((n,m)=>(
+    n+m
+))
+console.log(red)
+
+
+const all_num_col = [...colors,...scores]
+
+console.log(all_num_col)
+
