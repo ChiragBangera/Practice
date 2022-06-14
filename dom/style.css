@@ -1,0 +1,36 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#container:nth-of-type(1){
+    background-color: brown;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40vh;
+}
+button{
+    margin: 3px;
+    margin-left: 5px;
+    position: relative;
+}
+
+#container_1{
+    background-color: darkgoldenrod;
+    display: flex;
+    width: 75%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-top: 5px;
+    position: relative;
+
+}
