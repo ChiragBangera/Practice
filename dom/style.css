@@ -34,3 +34,9 @@ button{
     position: relative;
 
 }
+
+.form{
+    background-color: bisque;
+    width: 90vw;
+    height: 20em;
+}

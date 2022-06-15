@@ -6,31 +6,15 @@
 // }
 
 
-const adjcontainer = function(){
-    const select = document.querySelector('#container')
-    const cont = document.createElement('div')
-    cont.className = 'container'
-    select.insertAdjacentElement('afterend',cont)
-}
+// const adjcontainer = function(){
+//     const select = document.querySelector('#container')
+//     const cont = document.createElement('div')
+//     cont.className = 'container'
+//     select.insertAdjacentElement('afterend',cont)
+// }
 
-adjcontainer()
+// adjcontainer()
 
-
-const btn = document.querySelector(".Click")
-
-btn.onclick = function () {
-    alert('you clicked me');
-}
-
-function scream() {
-    console.log('Ahhhhhhhhh')
-}
-
-btn.onmouseenter = scream;
-
-document.querySelector('h1').onclick = ()=>{
-    alert('Hey Youclick me')
-}
 
 function colorGenerator() {
     const r = Math.floor(Math.random()*255) +1
@@ -79,3 +63,35 @@ btts.forEach(but=>{
 function colorize() {
     this.style.backgroundColor = colorGenerator()[0];
 }
+
+
+const input = document.querySelector('input');
+input.addEventListener('keydown',(e)=>{
+
+    console.log(e['key'],e['code'])
+})
+
+
+const form = document.querySelector('#shelter');
+const inpt = document.querySelector('#user');
+const newli = document.querySelector('#cats');
+
+form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const name = form.elements.naam.value
+    const tweet =  form.elements.comment.value
+    console.log(name,tweet)
+    addTweet(name,tweet)
+    form.elements.naam.value = ""
+    form.elements.comment.value = ""
+})
+
+function addTweet(usrname, tweet) {
+    const newlist = document.createElement('li')
+    const btag = document.createElement('b')
+    btag.append(usrname)
+    btag.append(tweet)
+    newlist.append(`User: ${usrname} - Tweeted: ${tweet}`)
+    newli.append(newlist)
+}
+
