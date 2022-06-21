@@ -45,3 +45,21 @@ changeColor('red',1000)
     .catch(()=>{
         console.log('Error')
     })
+
+
+
+const login = async (username,password)=>{
+    if (!username||!password) throw 'missing credentials'
+    if (password==='Chirag') return 'Welcome'
+    throw 'Invalid PassWord'
+}
+
+login('Bangera','Chirag')
+    .then(msg=>{
+        console.log('Logged In')
+        console.log(msg)
+    })
+    .catch(err=>{
+        console.log('ERROR')
+        console.log(err)
+    })
