@@ -1,32 +1,32 @@
 
-// const req = new XMLHttpRequest();
+const req = new XMLHttpRequest();
 
-// req.onload = ()=>{
-//     console.log("It Loaded");
-//     console.log(this);
-// };
+req.onload = ()=>{
+    console.log("It Loaded");
+    console.log(this);
+};
 
-// req.onerror = ()=>{
-//     console.log('Error');
-//     console.log(this);
-// };
-
-
-// req.open('GET','https://swapi.dev/api/people');
-// req.send();
+req.onerror = ()=>{
+    console.log('Error');
+    console.log(this);
+};
 
 
-// fetch('https://swapi.dev/api/people')
-//     .then(res=>{
-//         console.log('Resolved',res)
-//         return res.json()
-//     })
-//     .then(data=>{
-//         console.log('Data here',data.results)
-//     })
-//     .catch(e=>{
-//         console.log('Error!!!',e)
-//     })
+req.open('GET','https://swapi.dev/api/people');
+req.send();
+
+
+fetch('https://swapi.dev/api/people')
+    .then(res=>{
+        console.log('Resolved',res)
+        return res.json()
+    })
+    .then(data=>{
+        console.log('Data here',data.results)
+    })
+    .catch(e=>{
+        console.log('Error!!!',e)
+    })
 
 
 const loaddata = async ()=>{
