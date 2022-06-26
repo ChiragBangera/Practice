@@ -21,3 +21,12 @@ const c1 = new Color(255,65,78,'color')
 
 console.log(c1.rgb())
 console.log(c1.rgba(.4))
+
+
+const joke  = require('give-me-a-joke')
+const color  = require('colors')
+
+joke.getRandomDadJoke((joke)=>{
+   console.log(joke.rainbow)
+})
+
