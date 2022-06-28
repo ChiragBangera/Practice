@@ -1,37 +1,30 @@
 const express = require('express');
 const app = express()
+const playerdata = require('./data.json')
 
-// app.use((req,res)=>{
-//     console.log('Got a new request')
-//     res.send('Hello we got your request this a response')
-// })
+app.set('view engine','ejs')
+
 app.get('/',(req,res)=>{
-    console.log('This a roots requests')
-    res.send('This is the home page!!!')
+    res.render('home.ejs')
+})
+
+app.get('/rand',(req,res)=>{
+    const num = Math.floor(Math.random()*10)+1
+    res.render('random.ejs',{num})
 })
 
 app.get('/r/:sub',(req,res)=>{
     const {sub} = req.params
-    const {q} = req.query
-    res.send(`<h1>This is sub reddit parameter <b>${sub}</b> and this is your query <b>${q}</b></h1>`)
+    const data  = playerdata
+    console.log(data)
+    res.render('sub',{...data})
 })
-
-
 
 app.get('/cats',(req,res)=>{
-    console.log('This a cats requests')
-    res.send('Meouwww!!!')
+    const cats = ['masco','peeku','jackie','sheeku']
+    res.render('cats',{cats})
 })
 
-app.get('/dogs',(req,res)=>{
-    console.log('This a dogs requests')
-    res.send('Wooof!!!')
-})
-
-// rousts are matched in order'
-app.get('*',(req,res)=>{
-    res.send("I dotn know where i am:(")
-})
 
 
 

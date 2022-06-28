@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubReddit</title>
+</head>
+<body>
+    <h1>Squad Name is: <%= squadName %> </h1>
+    <h1>Home Town is: <%= homeTown %> </h1>
+    <h2>Total Squad Members: <%= members.length %> </h2>
+    <h2>Squad Members</h2>
+    <%for (member of members){%> 
+        <article>
+            <ul>
+                <li><h3><%=member.name%></h3></li>
+                <h3>Powers</h3>
+                <%for(power of member.powers){%>
+                <ul>
+                    <li><%= power %> </li>
+                </ul>
+            <%}%>
+            </ul>
+        </article>  
+    <%}%>
+
+</body>
+</html>
