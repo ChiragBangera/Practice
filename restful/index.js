@@ -1,27 +1,30 @@
 const express = require('express')
 const app = express()
+const {v4:uuid} = require('uuid')
+uuid()
 app.use(express.urlencoded({extended:true}))
 app.use(express.json({extended:true}))
 app.set('view engine', 'ejs')
 
+
 const comments = [
     {
-        id:1,  
+        id:uuid(),  
         username:"Chirag",
         comment:"I will be The best"
     },
     {
-        id:2,
+        id:uuid(),
         username:"Janmitha",
         comment:"I am The best after Chirag"
     },
     {
-        id:3,
+        id:uuid(),
         username:"Rajeshwari",
         comment:"I am the best"
     },
     {
-        id:4,
+        id:uuid(),
         username:"Chandrahas",
         comment:"I am the best after Rajeshwari"
     },
@@ -47,13 +50,13 @@ app.get('/comments/new',(req,res)=>{
 
 app.post('/comments',(req,res)=>{
     const {username,comment} = req.body
-    comments.push({username,comment})
+    comments.push({username,comment,id:uuid()})
     res.redirect('/comments')
 })
 
 app.get('/comments/:id',(req,res)=>{
     const {id}=req.params
-    const comment = comments.find(c=>c.id===parseInt(id))
+    const comment = comments.find(c=>c.id===id)
     res.render('show.ejs',{comment})
 })
 

@@ -9,7 +9,7 @@
 <body>
     <h1>Comments</h1>
     <% for (c of comments) {%>
-    <li><%= ` Name: ${c.username}, comment: ${c.comment}` %> </li>
+    <li><%= ` Name: ${c.username}, comment: ${c.comment}` %> <a href="/comments/<%= c.id %> ">Details</a></li>
     <% } %>
     <a href="/comments/new"><button>New Comment</button></a>  
 </body>
