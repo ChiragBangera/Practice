@@ -1,13 +1,15 @@
 const express = require('express')
 const app = express()
+const override = require('method-override')
 const {v4:uuid} = require('uuid')
 uuid()
 app.use(express.urlencoded({extended:true}))
 app.use(express.json({extended:true}))
 app.set('view engine', 'ejs')
+app.use(override('_method'))
 
 
-const comments = [
+let comments = [
     {
         id:uuid(),  
         username:"Chirag",
@@ -60,6 +62,27 @@ app.get('/comments/:id',(req,res)=>{
     res.render('show.ejs',{comment})
 })
 
+app.patch('/comments/:id',(req,res)=>{
+    const {id}=req.params
+    const newcomment = req.body.comment
+    const foundcomment = comments.find(c=>c.id===id)
+    foundcomment.comment = newcomment
+    res.redirect('/comments')
+})
+
+
+
+app.get('/comments/:id/edit',(req,res)=>{
+    const {id}=req.params
+    const comment = comments.find(c=>c.id===id)
+    res.render('edit.ejs',{comment})
+})
+
+app.delete('/comments/:id',(req,res)=>{
+    const {id}=req.params
+    comments = comments.filter(c=>c.id !==id)
+    res.redirect('/comments')
+})
 
 const port = 3000
 app.listen(port,()=>{
