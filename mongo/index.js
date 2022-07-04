@@ -20,9 +20,16 @@ const movieSchema = new mongoose.Schema({
     rating:String
 })
 
+
+movieSchema.methods.greet = function () {
+    console.log('Great Movie')
+}
+
+
 // Creating Model name should hav upper case
 const Movie = mongoose.model('Movie',movieSchema)
 // const mav = new Movie({title:'Maverick',year:2022,score:9,rating:10})
+
 
 Movie.insertMany([
     {title:'Maverick',year:2022,score:9,rating:"R"},
@@ -36,3 +43,10 @@ Movie.insertMany([
     console.log(data)
 })
 
+
+const findMovie = async () =>{
+    const foundMovie = await Movie.findOne({rating:'R'})
+    foundMovie.greet()
+}
+
+findMovie()
