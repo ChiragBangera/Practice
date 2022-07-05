@@ -41,7 +41,7 @@ const seedProduct = [
         category:'underwear'
     },
     {
-        name:'Cotton Dats Trim Fit',
+        name:'Cotton Days Trim Fit',
         price:699,
         category:'jeans'
     },

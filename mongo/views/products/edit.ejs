@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+</head>
+<body>
+    <h1>Edit <%= product.name %>  Product</h1>
+    <form action="/products/<%= product._id %>?_method=PUT" method="POST">
+        <label for="item">Item Name</label>
+        <input id="item" type="text" placeholder="Item" name="name" value="<%= product.name %> ">
+        <label for="price">Price</label>
+        <input id="price" type="number" placeholder="Price" name="price" value="<%= product.price%>">
+        <label for="cat">Category</label>
+        <select name="category" id="cat">Category 
+            <% for (let category of cat) {%>
+                <option value="<%= category %>" <%= product.category === category ? 'selected':''%>  ><%= category.toUpperCase() %> </option>
+            <% } %>  
+        </select>
+        <button>Edit Item</button>
+        <a href="/products"><button>Cancel</button></a>
+    </form>
+</body>
+</html>
+</body>
+</html>
