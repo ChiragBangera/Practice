@@ -18,8 +18,9 @@ mongoose.connect(DB,
     })
 
 
-app.get('/dogs',(req,res)=>{
-    res.send('Hello i am open')
+app.get('/products',async (req,res)=>{
+    const products = await Product.find({})
+    res.render('products/index', {products})
 })
 
 

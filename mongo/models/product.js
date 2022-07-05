@@ -12,6 +12,7 @@ const productShcema = new mongoose.Schema({
     },
     category:{
         type:String,
+        lowercase:true,
         enum:['shirt','jeans','underwear','t-shirt']
     }
 })
