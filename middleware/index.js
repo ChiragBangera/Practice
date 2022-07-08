@@ -2,24 +2,28 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 
-app.use(morgan('common'))
-app.use((req,res,next)=>{
-    console.log('This is a Middleware')
-    next()
+app.use(morgan('tiny'))
+
+
+
+const verifyPassword=((req, res, next) => {
+    const { password } = req.query
+    if (password === 'chickennugget'){
+        next()
+    }
+    res.send('Sorry you need a password')
 })
 
 
-app.get('/',(req,res)=>{
-   res.send('Home Page')
+app.get('/secret',verifyPassword,(req,res)=>{
+    res.send('My Secret is I want to be the best')
 })
 
-
-app.get('/dogs',(req,res)=>{
-    res.send('Wooof')
+app.use((req, res) => {
+    res.status(404).send('Page Not Found')
 })
-
 
 const port = 3000
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`Connected to port ${port}`)
 })
