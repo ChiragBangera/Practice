@@ -59,6 +59,8 @@ const seedProduct = [
 Product.insertMany(seedProduct)
     .then(res=>{
         console.log(res)
+        mongoose.connection.close()
+        console.log('Datbase Closed')
     })
     .catch(e=>{
         console.log(e)
