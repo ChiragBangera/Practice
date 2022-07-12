@@ -27,61 +27,53 @@ app.use(methodoverride('_method'))
 app.use(express.urlencoded({ extended: true }))
 
 // main
-app.get('/products', async (req, res,next) => {
-    try {
-        const { category } = req.query
-        if (category) {
-            const products = await Product.find({ category })
-            res.render('products/index', { products, category })
-        } else {
-            const products = await Product.find({})
-            res.render('products/index', { products, category: 'All' })
-        }
-    }catch (err){
-        next(err)
+app.get('/products', wrapAsync(async (req, res, next) => {
+
+    const { category } = req.query
+    if (category) {
+        const products = await Product.find({ category })
+        res.render('products/index', { products })
+    } else {
+        const products = await Product.find({})
+        res.render('products/index', { products, category: 'All' })
     }
-})
+}
+))
 
 //  form
 app.get('/products/new', (req, res) => {
     res.render('products/new', { cat })
 })
 
-app.get('/products/:id/edit', async (req, res, next) => {
-    try {
-        const { id } = req.params
-        const product = await Product.findById(id)
-        res.render('products/edit', { product, cat })
-    } catch (err) {
-        next(err)
-    }
-})
+app.get('/products/:id/edit', wrapAsync(async (req, res, next) => {
+
+    const { id } = req.params
+    const product = await Product.findById(id)
+    res.render('products/edit', { product, cat })
+}
+))
 
 
 // Products Page Route
-app.post('/products', async (req, res, next) => {
-    try {
-        const newProduct = new Product(req.body)
-        await newProduct.save()
-        res.redirect(`/products/${newProduct._id}`)
-    } catch (err) {
-        next(err)
-    }
-})
+app.post('/products', wrapAsync(async (req, res, next) => {
+
+    const newProduct = new Product(req.body)
+    await newProduct.save()
+    res.redirect(`/products/${newProduct._id}`)
+}))
+
+
 
 // product Show Page
-app.get('/products/:id', async (req, res, next) => {
-    try {
-        const { id } = req.params
-        const product = await Product.findById(id)
-        if (!product) {
-           throw new AppError("Not Found", 500)
-        }
-        res.render('products/show', { product })
-    } catch (err) {
-        next(err)
+app.get('/products/:id', wrapAsync(async (req, res, next) => {
+    const { id } = req.params
+    const product = await Product.findById(id)
+    if (!product) {
+        throw new AppError("Product Not Found", 500)
     }
-})
+    res.render('products/show', { product })
+}
+))
 
 //  Products show page edit route
 app.put('/products/:id', async (req, res, next) => {
@@ -104,7 +96,11 @@ app.delete('/products/:id', async (req, res) => {
 
 
 
-
+function wrapAsync(fn) {
+    return function (req, res, next) {
+        fn(req, res, next).catch(e => next(e))
+    }
+}
 
 
 
