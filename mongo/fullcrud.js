@@ -5,7 +5,9 @@ const methodoverride = require('method-override')
 app.use(methodoverride('_method'))
 app.use(express.urlencoded({extended:true}))
 const Product = require('./models/product')
+const Shop = require('./models/farm')
 const mongoose = require('mongoose')
+const { createIndexes } = require('./models/product')
 const DB = "mongodb+srv://chiragbangera:chiragadarsh@cluster1.c3lu4j0.mongodb.net/stockStatus?retryWrites=true&w=majority"
 mongoose.connect(DB,
     {
@@ -21,6 +23,62 @@ mongoose.connect(DB,
     })
 
 const cat = ['shirt','t-shirt','jeans','underwear']
+
+
+// Farm Routes
+app.get('/farms',async(req,res)=>{
+    const farms = await Shop.find({})
+    res.render('farms/index',{farms})
+})
+
+app.get('/farms/new',(req,res)=>{
+    res.render('farms/new')
+})
+
+app.get('/farms/:id',async (req,res)=>{
+    const {id} = req.params
+    const shop = await Shop.findById(id).populate('products')
+    res.render('farms/details',{shop})
+})
+
+
+app.post('/farms',async(req,res,next)=>{
+    const data = new Shop(req.body)
+    await data.save()
+    res.redirect('/farms')
+})
+
+
+
+app.get('/farms/:id/products/new',(req,res)=>{
+    const {id} = req.params
+    res.render('products/new',{cat,id})
+})
+
+
+app.post('/farms/:id/products',async(req,res)=>{
+    const {id} = req.params
+    const farm = await Shop.findById(id)
+    const {name,price,category} = req.body
+    const product = new Product({name,price,category})
+    farm.products.push(product)
+    product.farm = farm
+    await farm.save()
+    await product.save()
+    res.redirect(`/farms/${id}`)
+})
+
+app.delete('/farms/:id',async (req,res)=>{
+    const {id} = req.params
+    const farm  = await Shop.findByIdAndDelete(id)
+    if(farm.products.length){
+        const res = await Product.deleteMany({_id:{$in:farm.products}})
+        console.log(res)
+     }
+    res.redirect('/farms')
+})
+
+
 
 // main
 app.get('/products',async (req,res)=>{
@@ -57,7 +115,7 @@ app.post('/products',async (req,res)=>{
 // product 
 app.get('/products/:id',async (req,res)=>{
     const {id} = req.params
-    const product  = await Product.findById(id)
+    const product  = await Product.findById(id).populate('farm')
     res.render('products/show',{product})
  })
 

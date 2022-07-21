@@ -8,13 +8,13 @@
 </head>
 <body>
     <h1>Add a Product</h1>
-    <form action="/products" method="POST">
+    <form action="/farms/<%= id %>/products" method="POST">
         <label for="item">Item Name</label>
         <input id="item" type="text" placeholder="Item" name="name">
         <label for="price">Price</label>
         <input id="price" type="number" placeholder="Price" name="price">
         <label for="cat">Category</label>
-        <select name="category" id="cat">Catefory
+        <select name="category" id="cat">Category
             <option value="shirt">Shirt</option>
             <option value="jeans">Jeans</option>
             <option value="t-shirt">T-Shirt</option>

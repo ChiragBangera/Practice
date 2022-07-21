@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Shop = require('./farm')
 
 const productShcema = new mongoose.Schema({
     name:{
@@ -14,6 +15,9 @@ const productShcema = new mongoose.Schema({
         type:String,
         lowercase:true,
         enum:['shirt','jeans','underwear','t-shirt']
+    },
+    farm:{
+        type:mongoose.Schema.Types.ObjectId,ref:'Shop'
     }
 })
 
