@@ -4,6 +4,10 @@ app.set('view engine','ejs')
 const methodoverride = require('method-override')
 app.use(methodoverride('_method'))
 app.use(express.urlencoded({extended:true}))
+const flash =  require('connect-flash')
+const session = require('express-session')
+app.use(session({secret:'this is not a good secret', resave:false, saveUninitialized:false }))
+app.use(flash())
 const Product = require('./models/product')
 const Shop = require('./models/farm')
 const mongoose = require('mongoose')
@@ -28,7 +32,7 @@ const cat = ['shirt','t-shirt','jeans','underwear']
 // Farm Routes
 app.get('/farms',async(req,res)=>{
     const farms = await Shop.find({})
-    res.render('farms/index',{farms})
+    res.render('farms/index',{farms,messages:req.flash('success')})
 })
 
 app.get('/farms/new',(req,res)=>{
@@ -45,6 +49,7 @@ app.get('/farms/:id',async (req,res)=>{
 app.post('/farms',async(req,res,next)=>{
     const data = new Shop(req.body)
     await data.save()
+    req.flash('success','Made a new farm')
     res.redirect('/farms')
 })
 
